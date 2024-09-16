@@ -1,0 +1,7 @@
+[
+    { "name": "Apple", "icon": "FaApple" },
+    { "name": "Facebook", "icon": "FaFacebookSquare" },
+    { "name": "GitHub", "icon": "FaGithub" },
+    { "name": "Google", "icon": "FcGoogle" },
+    { "name": "X", "icon": "FaXTwitter" }
+  ]
