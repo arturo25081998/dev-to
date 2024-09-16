@@ -4,8 +4,9 @@ import { userLogged } from "@/hooks";
 import LogoutButton from "./LogoutButton";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
+import { CiMenuBurger } from "react-icons/ci";
 
-export default function Navbar() {
+export default function Navbar({ showNavbar }) {
   const user = userLogged();
   const {
     register,
@@ -21,13 +22,23 @@ export default function Navbar() {
   return (
     <nav className="bg-white grid grid-cols-1 p-2 md:grid-cols-1 2xl:grid-cols-[18rem_1fr_18rem] ">
       <div className="grid grid-cols-2 lg:grid-cols-[5rem_1fr_1fr] 2xl:col-start-2">
-        <Link href="/">
-          <img
-            className="w-12"
-            src="https://media.dev.to/cdn-cgi/image/quality=100/https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
-            alt=""
-          />
-        </Link>
+        <div className="flex gap-2 md:px-2">
+          <button
+            href=""
+            className="block text-[1.7rem] rounded-lg p-2 font-light hover:bg-blue-600/10 hover:text-blue-600 hover:underline md:hidden"
+            onClick={showNavbar}
+          >
+            <CiMenuBurger />
+          </button>
+          <Link href="/">
+            <img
+              className="w-12"
+              src="https://media.dev.to/cdn-cgi/image/quality=100/https://dev-to-uploads.s3.amazonaws.com/uploads/logos/resized_logo_UQww2soKuUsjaOGNB38o.png"
+              alt=""
+            />
+          </Link>
+        </div>
+
         <form className=" hidden lg:block" onSubmit={handleSubmit(onSubmit)}>
           <div
             className={clsx(
@@ -52,12 +63,13 @@ export default function Navbar() {
           </div>
         </form>
         <div className="flex flex-row items-center justify-end gap-2">
-          <a
+          <button
             href=""
             className="block text-[1.7rem] rounded-lg p-2 font-light hover:bg-blue-600/10 hover:text-blue-600 hover:underline md:hidden"
+            onClick={showNavbar}
           >
             <HiMagnifyingGlass />
-          </a>
+          </button>
           {!user && (
             <>
               <Link

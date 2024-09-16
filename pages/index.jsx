@@ -16,11 +16,13 @@ import {
   FaInstagramSquare,
   FaTwitch,
 } from "react-icons/fa";
+import clsx from "clsx";
 
 export default function Home() {
   const user = userLogged();
 
   const [posts, setPosts] = useState([]);
+  const [visibleNavbar, setVisibleNavbar] = useState(false);
 
   function setTopPosts() {
     const data = [...posts];
@@ -45,12 +47,33 @@ export default function Home() {
   }, []);
   //console.log(user);
 
+  function showNavBar() {
+    setVisibleNavbar(!visibleNavbar);
+  }
+
   return (
     <>
-      <Navbar />
+      <Navbar showNavbar={showNavBar} />
       <main className=" grid grid-cols-1 2xl:grid-cols-[18rem_1fr_18rem] py-4">
         <section className="grid xl:col-start-2 md:grid-cols-[15rem_1fr] lg:grid-cols-[1fr_35rem_1fr] xl:grid-cols-[15rem_1fr_23rem]">
-          <aside className="p-3 hidden md:flex flex-col gap-2">
+          <aside
+            className={clsx(
+              "p-3 z-50 absolute top-0 left-0 bg-white w-64 md:static md:bg-transparent md:w-auto  md:flex flex-col gap-2 ",
+              {
+                hidden: !visibleNavbar,
+              }
+            )}
+          >
+            <div className=" md:hidden flex justify-between border-slate-700 border-b p-2 items-center">
+              <h2>Dev community</h2>
+              <button
+                onClick={showNavBar}
+                className=" size-8 rounded-lg p-1 font-light hover:bg-blue-600/10 hover:text-blue-600"
+              >
+                ✕
+              </button>
+            </div>
+
             {!user && <Logincard />}
 
             <div className="flex flex-col gap-1">

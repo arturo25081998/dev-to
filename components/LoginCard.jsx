@@ -17,7 +17,7 @@ export default function Logincard() {
       </Link>
       <Link
         href="/login"
-        className="text-center hidden rounded-lg p-2 font-light hover:bg-blue-600/10 hover:text-blue-600 hover:underline md:block"
+        className="text-center rounded-lg p-2 font-light hover:bg-blue-600/10 hover:text-blue-600 hover:underline md:block"
       >
         Login
       </Link>
