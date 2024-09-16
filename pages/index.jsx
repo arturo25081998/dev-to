@@ -128,9 +128,11 @@ export default function Home() {
                 Top
               </button>
             </div>
-            {posts?.map((post) => {
+            {posts?.map((post, idx) => {
+              //console.log(idx);
               return (
                 <PostCard
+                  imageHide={idx == 0 ? false : true}
                   key={post._id}
                   title={post.title}
                   image={post.image}

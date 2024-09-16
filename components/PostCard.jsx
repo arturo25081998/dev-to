@@ -3,6 +3,7 @@ import { FaRegBookmark } from "react-icons/fa6";
 import Image from "next/image";
 import ReactionsImage from "@/components/ReactionsImage";
 import Link from "next/link";
+import clsx from "clsx";
 
 export default function PostCard({
   title,
@@ -13,6 +14,7 @@ export default function PostCard({
   user,
   date,
   id,
+  imageHide,
 }) {
   const totalReactions = reactions.reduce(
     (total, reaction) => total + reaction.quantity,
@@ -21,10 +23,16 @@ export default function PostCard({
 
   return (
     <article className="w-full flex flex-col gap-2 bg-white rounded-md pb-2">
-      <img src={image} alt="post-image" className="rounded-t-md" />
+      <img
+        src={image}
+        alt="post-image"
+        className={clsx("rounded-t-md", {
+          hidden: imageHide,
+        })}
+      />
       <div
         id="post-user-info"
-        className="grid grid-cols-[3rem_1fr] items-center px-3"
+        className="grid grid-cols-[3rem_1fr] items-center px-3 py-2"
       >
         <img
           src={user.profilePic}
@@ -54,16 +62,21 @@ export default function PostCard({
       <div className="px-3.5 py-2 flex flex-row justify-between">
         <div className="flex flex-row gap-1">
           <div className="py-1 px-3 hover:bg-gray-100 flex flex-row rounded-md items-center">
-            {reactions.map((reaction, idx) => {
-              return (
-                <ReactionsImage
-                  reaction={reaction.reaction}
-                  toLeft={false}
-                  zIndex={40}
-                  key={`${reaction.reaction}-${idx}`}
-                />
-              );
-            })}
+            <div className="flex">
+              {reactions.map((reaction, idx) => {
+                const zContent = (idx + 1) * 10;
+
+                // console.log(zContent);
+                return (
+                  <ReactionsImage
+                    reaction={reaction.reaction}
+                    toLeft={zContent == 10 ? false : true}
+                    zIndex={zContent}
+                    key={`${reaction.reaction}-${idx}`}
+                  />
+                );
+              })}
+            </div>
             <p className="pl-2 text-sm inline-flex">
               {totalReactions}
               <span className=" hidden sm:block pl-1">Reactions</span>
