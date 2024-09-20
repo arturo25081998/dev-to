@@ -18,10 +18,10 @@ import {
 } from "react-icons/fa";
 import clsx from "clsx";
 
-export default function Home({ posts }) {
+export default function Home() {
   const user = userLogged();
 
-  const [posts, setPosts] = useState(posts);
+  const [posts, setPosts] = useState([]);
   const [visibleNavbar, setVisibleNavbar] = useState(false);
 
   function setTopPosts() {
@@ -36,7 +36,6 @@ export default function Home({ posts }) {
     setPosts(sortedPosts);
   }
 
-  /*
   useEffect(() => {
     getAllPosts()
       .then((data) => {
@@ -46,7 +45,7 @@ export default function Home({ posts }) {
       })
       .catch((error) => console.log(error));
   }, []);
-  //console.log(user);*/
+  //console.log(user);
 
   function showNavBar() {
     setVisibleNavbar(!visibleNavbar);
@@ -207,7 +206,7 @@ export default function Home({ posts }) {
     </>
   );
 }
-
+/*
 // static site generation
 export async function getStaticProps() {
   console.log("getStaticProps");
@@ -218,11 +217,11 @@ export async function getStaticProps() {
     revalidate: 60,
   };
 }
+*/
 
-/*/Server side rendering
+//Server side rendering
 export async function getServerSideProps() {
   return {
     props: {},
   };
 }
-*/
